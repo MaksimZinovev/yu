@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(task-master --version)",
+      "Bash(task-master init)",
+      "Bash(git add .)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
