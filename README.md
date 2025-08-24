@@ -1,71 +1,192 @@
-# yu README
+# Yu - @dspy Chat Participant for VS Code
 
-This is the README for your extension "yu". After writing up a brief description, we recommend including the following sections.
+A VS Code extension that implements an intelligent chat participant `@dspy` inside Copilot Chat, using DSPy-style reasoning loops to provide more reliable and structured code assistance.
 
-## Features
+## 🎯 Overview
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+**Yu** enhances your development workflow by adding a `@dspy` chat participant that uses structured reasoning loops (plan → draft → critique → revise) to provide more reliable code completions and refactoring suggestions. The extension leverages **Ax** (TypeScript DSPy) to orchestrate multi-step LLM conversations through the VS Code Language Model API.
 
-For example if there is an image subfolder under your extension project workspace:
+### Key Benefits
 
-\!\[feature X\]\(images/feature-x.png\)
+- **Structured Reasoning**: Uses DSPy-style patterns to reduce hallucinations and improve code quality
+- **Context-Aware**: Automatically collects relevant code context from your editor
+- **Streaming Responses**: Real-time markdown output with "Insert to Editor" actions
+- **Extensible**: Built to be composable and adaptable to new AI providers
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## ✨ Features
 
-## Requirements
+### MVP Features
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- **🤖 @dspy Chat Participant**: Invoke from Copilot Chat for structured assistance
+- **📋 Multi-Step Process**: Responses include Plan, Draft, Critique, and Final sections
+- **🎯 Smart Context**: Automatically uses selected code or current file as context
+- **⚡ Quick Actions**: "Insert to Editor" button to apply final code snippets
+- **🔄 Ax Pipeline**: Uses `@ax-llm/ax` for structured LLM orchestration
 
-## Extension Settings
+### Future Roadmap
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+- **💭 Conversation Memory**: Remember findings and instructions across chat turns
+- **🔍 Extended Context**: Integration with docs and repository context
+- **🚀 Proactive Suggestions**: Intelligent next-step recommendations
+- **🏠 Local Runners**: Support for local DSPy (Python) execution
 
-For example:
+## 🚀 Getting Started
 
-This extension contributes the following settings:
+### Prerequisites
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+- VS Code 1.103.0 or higher
+- Access to VS Code's Language Model API (varies by organization/subscription)
 
-## Known Issues
+### Installation
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+1. Clone and install dependencies:
 
-## Release Notes
+   ```bash
+   npm install
+   ```
 
-Users appreciate release notes as you update your extension.
+2. Compile and package the extension:
 
-### 1.0.0
+   ```bash
+   npm run package
+   ```
 
-Initial release of ...
+3. Install the extension in VS Code:
+   - Open VS Code
+   - Press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (macOS)
+   - Type "Extensions: Install from VSIX..." and select the generated `.vsix` file
 
-### 1.0.1
+### Usage
 
-Fixed issue #.
+1. Open Copilot Chat in VS Code
+2. Type `@dspy` followed by your request, for example:
 
-### 1.1.0
+   ```
+   @dspy Refactor this function to be more efficient
+   @dspy Add error handling to this code
+   @dspy Explain what this code does and suggest improvements
+   ```
 
-Added features X, Y, and Z.
+3. The `@dspy` participant will respond with structured reasoning steps
+4. Use the "Insert to Editor" button to apply the final code suggestions
+
+## 🛠 Development
+
+### Project Structure
+
+```
+src/
+├── extension.ts          # Main extension entry point
+└── test/
+    └── extension.test.ts # Extension tests
+docs/
+├── prd.md               # Product Requirements Document
+└── todos.md            # Development TODO list
+```
+
+### Development Commands
+
+```bash
+# Development
+npm run compile          # Compile TypeScript, check types, lint, and build
+npm run watch            # Run development mode with file watching
+npm run package          # Create production build for publishing
+
+# Quality Assurance
+npm run check-types      # Run TypeScript type checking
+npm run lint             # Run ESLint
+npm run test             # Run VS Code extension tests
+
+# Watch Commands
+npm run watch:esbuild    # Watch for changes and rebuild with esbuild
+npm run watch:tsc        # Watch for TypeScript changes
+npm run watch-tests      # Watch for test file changes
+```
+
+## 🛠 Custoom Development Instructions  for local setup Claude Code + Claude Code Router + Task-Master-ai
+
+```bash
+# Ensure Claude Code is running
+ccr status          # Check if Claude Code Router is running
+ccr start           # Run development mode with file watching
+
+# Launching Claude Code (in separate terminal tab)
+ANTHROPIC_BASE_URL=http://localhost:3456 ANTHROPIC_API_KEY=any-string-is-ok npx @anthropic-ai/claude-code        
+
+# Taskmaster 
+source .env                                       # Ensure API keys are loaded and available as env variables
+tm list                                           # List tasks
+task-master expand --id=3                         # Expand task 3
+task-master set-status --id=3 --status=done       # Expand task 3
+```
+
+### Architecture
+
+The extension follows a modular architecture:
+
+1. **Extension Layer**: Registers the chat participant and manages context collection
+2. **Ax Pipeline**: Uses structured signatures for plan/draft/critique orchestration
+3. **VS Code LM Adapter**: Bridges Ax with the VS Code Language Model API
+4. **UI Integration**: Handles streaming responses and quick actions
+
+## 🔧 Configuration
+
+### TypeScript Configuration
+
+- Target: ES2022
+- Module: Node16
+- Strict mode enabled
+- Source maps enabled
+
+### ESLint Rules
+
+- TypeScript naming conventions
+- Code quality enforcement (curly braces, equality checks, semicolons)
+
+## 📋 Requirements
+
+- VS Code 1.103.0+
+- Access to VS Code Language Model API
+- Node.js for development
+- No Python runtime required (Ax runs in TypeScript/JavaScript)
+
+## 🎯 Current Status
+
+**Phase**: Early Development - MVP in Progress
+
+The project scaffold is complete with:
+
+- ✅ VS Code extension structure
+- ✅ Basic command registration
+- ✅ TypeScript configuration
+- ✅ Build and test pipeline
+- ✅ Task Master integration
+- ⏳ Chat participant implementation
+- ⏳ Ax pipeline integration
+- ⏳ VS Code LM API integration
+
+See [docs/todos.md](docs/todos.md) for detailed progress tracking.
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests for new functionality
+5. Run `npm run lint` and `npm run test`
+6. Submit a pull request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🔗 Related Links
+
+- [VS Code Extension API](https://code.visualstudio.com/api)
+- [Ax (TypeScript DSPy)](https://github.com/ax-llm/ax)
+- [DSPy Documentation](https://dspy-docs.vercel.app/)
+- [VS Code LM API](https://code.visualstudio.com/api/extension-guides/language-models)
 
 ---
 
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+**Built with ❤️ using Claude Code**

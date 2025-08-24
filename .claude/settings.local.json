@@ -3,7 +3,8 @@
     "allow": [
       "Bash(task-master --version)",
       "Bash(task-master init)",
-      "Bash(git add .)"
+      "Bash(git add .)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit: VS Code extension scaffold developed with Claude Code\n\n- Created @dspy chat participant extension project\n- Added comprehensive CLAUDE.md documentation\n- Configured Task Master integration\n- Set up TypeScript, ESLint, and build pipeline\n- Included PRD and development TODOs\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []
