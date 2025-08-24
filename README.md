@@ -103,6 +103,14 @@ npm run watch:tsc        # Watch for TypeScript changes
 npm run watch-tests      # Watch for test file changes
 ```
 
+### In VS Code
+
+- Ensure tasks. and launch.json are configured in `.vscode`
+- Build: npm run compile
+- Run: “Run Extension (Watch)” config
+- In the Dev Host: open Copilot Chat → @dspy hello
+- See streamed ack + “dspy” Output channel logs
+
 ## 🛠 Custoom Development Instructions  for local setup Claude Code + Claude Code Router + Task-Master-ai
 
 ```bash

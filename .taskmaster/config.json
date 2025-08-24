@@ -2,13 +2,13 @@
   "models": {
     "main": {
       "provider": "openrouter",
-      "modelId": "google/gemini-2.5-flash",
+      "modelId": "qwen/qwen3-coder",
       "maxTokens": 120000,
       "temperature": 0.2
     },
     "research": {
-      "provider": "openai",
-      "modelId": "gpt-4o-mini-search-preview",
+      "provider": "openrouter",
+      "modelId": "openai/gpt-4o-mini-search-preview",
       "maxTokens": 8700,
       "temperature": 0.1
     },
