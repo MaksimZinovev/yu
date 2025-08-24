@@ -1,0 +1,29 @@
+{
+    "PROXY_URL": "",
+    "LOG": true,
+    "API_TIMEOUT_MS": 600000,
+    "Providers": [
+        {
+            "name": "openrouter",
+            "api_base_url": "https://openrouter.ai/api/v1/chat/completions",
+            "api_key": "${OPENROUTER_API_KEY}",
+            "models": [
+                "z-ai/glm-4.5",
+                "google/gemini-2.5-flash"
+            ],
+            "transformer": {
+                "use": [
+                    "openrouter"
+                ]
+            }
+        }
+    ],
+    "Router": {
+        "default": "openrouter,z-ai/glm-4.5",
+        "background": "openrouter,z-ai/glm-4.5",
+        "think": "openrouter,z-ai/glm-4.5",
+        "longContext": "openrouter,google/gemini-2.5-flash",
+        "longContextThreshold": 60000,
+        "webSearch": "openrouter,google/gemini-2.5-flash"
+    }
+}

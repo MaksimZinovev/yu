@@ -16,6 +16,9 @@ dev-debug.log
 node_modules/
 # Environment variables
 .env
+
+# Configuration files with secrets
+config.json
 # Editor directories and files
 .idea
 .vscode
