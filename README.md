@@ -29,6 +29,7 @@ A VS Code extension that implements an intelligent chat participant `@dspy` insi
 - **🔍 Extended Context**: Integration with docs and repository context
 - **🚀 Proactive Suggestions**: Intelligent next-step recommendations
 - **🏠 Local Runners**: Support for local DSPy (Python) execution
+- See [roadmap](roadmap.md) for more details.
 
 ## 🚀 Getting Started
 
